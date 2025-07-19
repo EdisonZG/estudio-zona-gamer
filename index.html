@@ -4,26 +4,97 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Estudio Zona Gamer</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet">
   <style>
     body {
+      margin: 0;
       background-color: #000;
       color: #00ff88;
-      font-family: sans-serif;
+      font-family: 'Orbitron', sans-serif;
+    }
+
+    header {
+      background-color: #000;
+      padding: 20px 0;
       text-align: center;
-      padding: 50px;
+      border-bottom: 2px solid #00ff88;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
     }
-    h1 {
-      font-size: 3em;
+
+    nav a {
+      color: #00ff88;
+      margin: 0 15px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: color 0.3s;
     }
-    p {
-      font-size: 1.2em;
+
+    nav a:hover {
+      color: #00ffaa;
+    }
+
+    .contenedor {
+      padding: 60px 20px;
+      text-align: center;
+    }
+
+    img.logo {
+      width: 200px;
+      margin-bottom: 30px;
+    }
+
+    h1, h2 {
+      margin: 20px 0;
+    }
+
+    a {
+      color: #00ff88;
     }
   </style>
 </head>
 <body>
-  <img src="logo.png" alt="Logo Estudio Zona Gamer" width="200" style="display: block; margin: auto; margin-bottom: 20px;">
-  <h1>Bienvenido a Estudio Zona Gamer</h1>
-  <p>¡Muy pronto estará disponible nuestro sitio oficial!</p>
-  <p>Un portal al mundo virtual está en construcción 🚀</p>
+
+  <header>
+    <nav>
+      <a href="#inicio">Inicio</a>
+      <a href="#proyectos">Proyectos</a>
+      <a href="#servicios">Servicios</a>
+      <a href="#nosotros">Nosotros</a>
+      <a href="#contacto">Contacto</a>
+    </nav>
+  </header>
+
+  <div id="inicio" class="contenedor">
+    <img src="logo.png" alt="Logo Estudio Zona Gamer" class="logo">
+    <h1>¡Bienvenido a Estudio Zona Gamer!</h1>
+    <p>Tu portal al mundo del gaming está en construcción 🚀</p>
+  </div>
+
+  <div id="proyectos" class="contenedor">
+    <h2>Proyectos</h2>
+    <p>Aquí mostraremos nuestros desarrollos de videojuegos, diseños y más.</p>
+  </div>
+
+  <div id="servicios" class="contenedor">
+    <h2>Servicios</h2>
+    <p>Ofrecemos diseño digital, soporte técnico, desarrollo web y más.</p>
+  </div>
+
+  <div id="nosotros" class="contenedor">
+    <h2>Nosotros</h2>
+    <p>Estudio Zona Gamer nació para impulsar la cultura geek y gamer en nuestra comunidad.</p>
+  </div>
+
+  <div id="contacto" class="contenedor">
+    <h2>Contacto</h2>
+    <p>
+      📧 Correo: <a href="mailto:edisonzg26@gmail.com">edisonzg26@gmail.com</a><br>
+      📱 WhatsApp: <a href="https://wa.me/573044430839">304 443 0839</a>
+    </p>
+  </div>
+
 </body>
 </html>
+
