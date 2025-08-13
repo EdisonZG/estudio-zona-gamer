@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Calculadora Básica</title>
+  <title>Calculadora Científica</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -17,7 +17,12 @@
       padding: 20px;
       border-radius: 10px;
       box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-      width: 260px;
+      width: 280px;
+      transition: width 0.3s;
+    }
+    .calculadora.expandida {
+      width: 480px;
+      transition: width 0.3s;
     }
     .pantalla {
       width: 100%;
@@ -30,10 +35,18 @@
       padding: 5px 10px;
       text-align: right;
     }
-    .botones {
+    .botones, .cientificos {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
       gap: 8px;
+      margin-bottom: 8px;
+    }
+    .cientificos {
+      display: none;
+    }
+    .cientificos.visible {
+      display: grid;
+      margin-bottom: 8px;
     }
     button {
       padding: 16px;
@@ -52,11 +65,26 @@
       background: #e67e22;
       color: #fff;
     }
+    .expandir {
+      background: #18a2b8;
+      margin-bottom: 8px;
+    }
   </style>
 </head>
 <body>
-  <div class="calculadora">
+  <div id="calculadora" class="calculadora">
     <input type="text" id="pantalla" class="pantalla" disabled>
+    <button class="expandir" onclick="toggleCientifica()">Modo científico</button>
+    <div id="cientificos" class="cientificos">
+      <button onclick="funcion('Math.sin')">sin</button>
+      <button onclick="funcion('Math.cos')">cos</button>
+      <button onclick="funcion('Math.tan')">tan</button>
+      <button onclick="funcion('Math.log10')">log</button>
+      <button onclick="funcion('Math.sqrt')">√</button>
+      <button onclick="funcion('Math.pow', '^')">xʸ</button>
+      <button onclick="agregar('(')">(</button>
+      <button onclick="agregar(')')">)</button>
+    </div>
     <div class="botones">
       <button onclick="agregar('7')">7</button>
       <button onclick="agregar('8')">8</button>
@@ -79,6 +107,9 @@
   </div>
   <script>
     let pantalla = document.getElementById('pantalla');
+    let cientificos = document.getElementById('cientificos');
+    let calculadora = document.getElementById('calculadora');
+    let modoCientifico = false;
 
     function agregar(valor) {
       pantalla.value += valor;
@@ -90,9 +121,38 @@
 
     function calcular() {
       try {
-        pantalla.value = eval(pantalla.value);
+        // Permite el uso de ^ para potencias en modo científico
+        let expresion = pantalla.value.replace(/\^/g, '**');
+        pantalla.value = eval(expresion);
       } catch {
         pantalla.value = "Error";
+      }
+    }
+
+    function funcion(func, operador) {
+      let value = pantalla.value;
+      if (func === 'Math.pow') {
+        pantalla.value += '^';
+      } else if (func === 'Math.log10') {
+        pantalla.value = `Math.log10(${value})`;
+        calcular();
+      } else if (func === 'Math.sqrt') {
+        pantalla.value = `Math.sqrt(${value})`;
+        calcular();
+      } else {
+        pantalla.value = `${func}(${value})`;
+        calcular();
+      }
+    }
+
+    function toggleCientifica() {
+      modoCientifico = !modoCientifico;
+      if(modoCientifico) {
+        cientificos.classList.add('visible');
+        calculadora.classList.add('expandida');
+      } else {
+        cientificos.classList.remove('visible');
+        calculadora.classList.remove('expandida');
       }
     }
   </script>
