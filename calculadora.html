@@ -76,12 +76,16 @@
     <input type="text" id="pantalla" class="pantalla" disabled>
     <button class="expandir" onclick="toggleCientifica()">Modo científico</button>
     <div id="cientificos" class="cientificos">
-      <button onclick="funcion('Math.sin')">sin</button>
-      <button onclick="funcion('Math.cos')">cos</button>
-      <button onclick="funcion('Math.tan')">tan</button>
-      <button onclick="funcion('Math.log10')">log</button>
-      <button onclick="funcion('Math.sqrt')">√</button>
-      <button onclick="funcion('Math.pow', '^')">xʸ</button>
+      <button onclick="funcion('sin')">sin</button>
+      <button onclick="funcion('cos')">cos</button>
+      <button onclick="funcion('tan')">tan</button>
+      <button onclick="funcion('log10')">log</button>
+      <button onclick="funcion('ln')">ln</button>
+      <button onclick="funcion('sqrt')">√</button>
+      <button onclick="potencia()">xʸ</button>
+      <button onclick="insertarPi()">π</button>
+      <button onclick="funcion('exp')">exp</button>
+      <button onclick="factorial()">n!</button>
       <button onclick="agregar('(')">(</button>
       <button onclick="agregar(')')">)</button>
     </div>
@@ -121,27 +125,68 @@
 
     function calcular() {
       try {
-        // Permite el uso de ^ para potencias en modo científico
-        let expresion = pantalla.value.replace(/\^/g, '**');
+        let expresion = pantalla.value
+          .replace(/π/g, Math.PI)
+          .replace(/\^/g, '**');
         pantalla.value = eval(expresion);
       } catch {
         pantalla.value = "Error";
       }
     }
 
-    function funcion(func, operador) {
+    function funcion(tipo) {
       let value = pantalla.value;
-      if (func === 'Math.pow') {
-        pantalla.value += '^';
-      } else if (func === 'Math.log10') {
-        pantalla.value = `Math.log10(${value})`;
-        calcular();
-      } else if (func === 'Math.sqrt') {
-        pantalla.value = `Math.sqrt(${value})`;
-        calcular();
-      } else {
-        pantalla.value = `${func}(${value})`;
-        calcular();
+      let resultado = "";
+
+      try {
+        let num = eval(value.replace(/π/g, Math.PI));
+        switch (tipo) {
+          case 'sin':
+            resultado = Math.sin(num).toString();
+            break;
+          case 'cos':
+            resultado = Math.cos(num).toString();
+            break;
+          case 'tan':
+            resultado = Math.tan(num).toString();
+            break;
+          case 'log10':
+            resultado = Math.log10(num).toString();
+            break;
+          case 'ln':
+            resultado = Math.log(num).toString();
+            break;
+          case 'sqrt':
+            resultado = Math.sqrt(num).toString();
+            break;
+          case 'exp':
+            resultado = Math.exp(num).toString();
+            break;
+        }
+        pantalla.value = resultado;
+      } catch {
+        pantalla.value = "Error";
+      }
+    }
+
+    function potencia() {
+      pantalla.value += "^";
+    }
+
+    function insertarPi() {
+      pantalla.value += "π";
+    }
+
+    function factorial() {
+      let value = pantalla.value;
+      try {
+        let num = Math.floor(eval(value.replace(/π/g, Math.PI)));
+        if (num < 0 || isNaN(num)) throw Error();
+        let res = 1;
+        for (let i = 2; i <= num; i++) res *= i;
+        pantalla.value = res.toString();
+      } catch {
+        pantalla.value = "Error";
       }
     }
 
