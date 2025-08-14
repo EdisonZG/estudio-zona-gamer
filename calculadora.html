@@ -4,92 +4,26 @@
   <meta charset="UTF-8">
   <title>Calculadora Científica Completa</title>
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #f9f9f9;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-    }
-    .calculadora {
-      background: #222;
-      padding: 20px;
-      border-radius: 10px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-      width: 600px;
-      transition: width 0.3s;
-    }
-    .pantalla {
-      width: 100%;
-      height: 40px;
-      font-size: 22px;
-      margin-bottom: 12px;
-      background: #fff;
-      border: none;
-      border-radius: 6px;
-      padding: 5px 10px;
-      text-align: right;
-    }
-    .botones, .cientificos, .estadisticas {
-      display: grid;
-      grid-template-columns: repeat(6, 1fr);
-      gap: 8px;
-      margin-bottom: 8px;
-    }
-    button {
-      padding: 12px;
-      font-size: 16px;
-      background: #444;
-      color: #fff;
-      border: none;
-      border-radius: 6px;
-      cursor: pointer;
-      transition: background 0.2s;
-    }
-    button:hover {
-      background: #666;
-    }
-    .igual {
-      background: #e67e22;
-      color: #fff;
-    }
-    .expandir {
-      background: #18a2b8;
-      margin-bottom: 8px;
-      grid-column: span 6;
-    }
-    .label {
-      grid-column: span 6;
-      color: #bbb;
-      font-size: 14px;
-      text-align: center;
-      margin-bottom: 4px;
-    }
-    @media (max-width: 700px) {
-      .calculadora { width: 98vw; }
-      .botones, .cientificos, .estadisticas { grid-template-columns: repeat(4, 1fr);}
-    }
+    body { font-family: Arial, sans-serif; background: #f9f9f9; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
+    .calculadora { background: #222; padding: 20px; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.2); width: 600px; transition: width 0.3s; }
+    .pantalla { width: 100%; height: 40px; font-size: 22px; margin-bottom: 12px; background: #fff; border: none; border-radius: 6px; padding: 5px 10px; text-align: right; }
+    .botones, .cientificos, .estadisticas { display: grid; grid-template-columns: repeat(6, 1fr); gap: 8px; margin-bottom: 8px; }
+    button { padding: 12px; font-size: 16px; background: #444; color: #fff; border: none; border-radius: 6px; cursor: pointer; transition: background 0.2s; }
+    button:hover { background: #666; }
+    .igual { background: #e67e22; color: #fff; }
+    .expandir { background: #18a2b8; margin-bottom: 8px; grid-column: span 6; }
+    .inicio { background: #1abc9c; color: #fff; font-weight: bold; margin-bottom: 18px; width: 100%; border-radius: 6px; }
+    .label { grid-column: span 6; color: #bbb; font-size: 14px; text-align: center; margin-bottom: 4px; }
+    @media (max-width: 700px) { .calculadora { width: 98vw; } .botones, .cientificos, .estadisticas { grid-template-columns: repeat(4, 1fr);} }
   </style>
 </head>
 <body>
   <div id="calculadora" class="calculadora">
-    <input type="text" id="pantalla" class="pantalla" placeholder="0" disabled>
+    <button class="inicio" onclick="location.href='index.html'">⟵ Inicio</button>
+    <input type="text" id="pantalla" class="pantalla" placeholder="0" readonly>
     <button class="expandir" onclick="toggleCientifica()">Modo científico</button>
     <div class="label">Funciones científicas</div>
     <div id="cientificos" class="cientificos">
-      <button onclick="funcion('sin')">sin</button>
-      <button onclick="funcion('cos')">cos</button>
-      <button onclick="funcion('tan')">tan</button>
-      <button onclick="funcion('asin')">asin</button>
-      <button onclick="funcion('acos')">acos</button>
-      <button onclick="funcion('atan')">atan</button>
-      <button onclick="funcion('sindeg')">sin°</button>
-      <button onclick="funcion('cosdeg')">cos°</button>
-      <button onclick="funcion('tandeg')">tan°</button>
-      <button onclick="funcion('asindeg')">asin°</button>
-      <button onclick="funcion('acosdeg')">acos°</button>
-      <button onclick="funcion('atandeg')">atan°</button>
       <button onclick="funcion('abs')">abs</button>
       <button onclick="funcion('round')">round</button>
       <button onclick="funcion('floor')">floor</button>
@@ -153,24 +87,36 @@
     let calculadora = document.getElementById('calculadora');
     let modoCientifico = true;
 
-    function agregar(valor) {
-      pantalla.value += valor;
-    }
+    function agregar(valor) { pantalla.value += valor; }
+    function limpiar() { pantalla.value = ''; }
+    function borrarUno() { pantalla.value = pantalla.value.slice(0, -1); }
 
-    function limpiar() {
-      pantalla.value = '';
-    }
-
-    function borrarUno() {
-      pantalla.value = pantalla.value.slice(0, -1);
+    function parsearExpresion(expr) {
+      return expr
+        .replace(/π/g, "Math.PI")
+        .replace(/e(?![a-zA-Z])/g, "Math.E")
+        .replace(/(\d+(\.\d+)?|\w+)\s*\^\s*(\d+(\.\d+)?|\w+)/g, "Math.pow($1,$3)")
+        .replace(/(\b|[^a-zA-Z0-9_])(log10|log|ln|sqrt|cbrt|abs|floor|ceil|round|exp|exp10)\s*\(/g, function(_, pre, fn){
+          switch(fn){
+            case "log": return pre+"Math.log10(";
+            case "log10": return pre+"Math.log10(";
+            case "ln": return pre+"Math.log(";
+            case "sqrt": return pre+"Math.sqrt(";
+            case "cbrt": return pre+"Math.cbrt(";
+            case "abs": return pre+"Math.abs(";
+            case "floor": return pre+"Math.floor(";
+            case "ceil": return pre+"Math.ceil(";
+            case "round": return pre+"Math.round(";
+            case "exp": return pre+"Math.exp(";
+            case "exp10": return pre+"Math.pow(10,";
+          }
+        })
+        .replace(/(\d+(\.\d+)?)%/g, "($1/100)");
     }
 
     function calcular() {
       try {
-        let expresion = pantalla.value
-          .replace(/π/g, Math.PI)
-          .replace(/e/g, Math.E)
-          .replace(/\^/g, '**');
+        let expresion = parsearExpresion(pantalla.value);
         pantalla.value = eval(expresion);
       } catch {
         pantalla.value = "Error";
@@ -182,20 +128,8 @@
       let resultado = "";
 
       try {
-        let arg = eval(value.replace(/π/g, Math.PI).replace(/e/g, Math.E));
+        let arg = eval(parsearExpresion(value));
         switch (tipo) {
-          case 'sin': resultado = Math.sin(arg); break;
-          case 'cos': resultado = Math.cos(arg); break;
-          case 'tan': resultado = Math.tan(arg); break;
-          case 'asin': resultado = Math.asin(arg); break;
-          case 'acos': resultado = Math.acos(arg); break;
-          case 'atan': resultado = Math.atan(arg); break;
-          case 'sindeg': resultado = Math.sin(arg * Math.PI / 180); break;
-          case 'cosdeg': resultado = Math.cos(arg * Math.PI / 180); break;
-          case 'tandeg': resultado = Math.tan(arg * Math.PI / 180); break;
-          case 'asindeg': resultado = Math.asin(arg) * 180 / Math.PI; break;
-          case 'acosdeg': resultado = Math.acos(arg) * 180 / Math.PI; break;
-          case 'atandeg': resultado = Math.atan(arg) * 180 / Math.PI; break;
           case 'abs': resultado = Math.abs(arg); break;
           case 'round': resultado = Math.round(arg); break;
           case 'floor': resultado = Math.floor(arg); break;
@@ -216,28 +150,20 @@
       }
     }
 
-    function potencia() {
-      pantalla.value += "^";
-    }
-
-    function insertarConst(c) {
-      pantalla.value += c;
-    }
-
+    function potencia() { pantalla.value += "^"; }
+    function insertarConst(c) { pantalla.value += c; }
     function porcentaje() {
       try {
-        let value = eval(pantalla.value.replace(/π/g, Math.PI).replace(/e/g, Math.E));
+        let value = eval(parsearExpresion(pantalla.value));
         pantalla.value = value / 100;
-      } catch {
-        pantalla.value = "Error";
-      }
+      } catch { pantalla.value = "Error"; }
     }
 
     function logBase() {
       let partes = pantalla.value.split(',');
       if (partes.length === 2) {
-        let base = eval(partes[0].replace(/π/g, Math.PI).replace(/e/g, Math.E));
-        let num = eval(partes[1].replace(/π/g, Math.PI).replace(/e/g, Math.E));
+        let base = eval(parsearExpresion(partes[0]));
+        let num = eval(parsearExpresion(partes[1]));
         if (base > 0 && base !== 1 && num > 0) {
           pantalla.value = (Math.log(num) / Math.log(base));
         } else {
@@ -247,50 +173,37 @@
         pantalla.value = "Ej: base,numero";
       }
     }
-
     function factorial() {
       let value = pantalla.value;
       try {
-        let num = Math.floor(eval(value.replace(/π/g, Math.PI).replace(/e/g, Math.E)));
+        let num = Math.floor(eval(parsearExpresion(value)));
         if (num < 0 || isNaN(num)) throw Error();
         let res = 1;
         for (let i = 2; i <= num; i++) res *= i;
         pantalla.value = res.toString();
-      } catch {
-        pantalla.value = "Error";
-      }
+      } catch { pantalla.value = "Error"; }
     }
 
     function permutacion() {
-      // nPr: pantalla = "n,r"
       let partes = pantalla.value.split(',');
       if (partes.length === 2) {
         let n = parseInt(partes[0]);
         let r = parseInt(partes[1]);
         if (n >= r && n >= 0 && r >= 0) {
           pantalla.value = (factorialNum(n) / factorialNum(n - r)).toString();
-        } else {
-          pantalla.value = "Error";
-        }
-      } else {
-        pantalla.value = "Ej: n,r";
-      }
+        } else { pantalla.value = "Error"; }
+      } else { pantalla.value = "Ej: n,r"; }
     }
 
     function combinacion() {
-      // nCr: pantalla = "n,r"
       let partes = pantalla.value.split(',');
       if (partes.length === 2) {
         let n = parseInt(partes[0]);
         let r = parseInt(partes[1]);
         if (n >= r && n >= 0 && r >= 0) {
           pantalla.value = (factorialNum(n) / (factorialNum(r) * factorialNum(n - r))).toString();
-        } else {
-          pantalla.value = "Error";
-        }
-      } else {
-        pantalla.value = "Ej: n,r";
-      }
+        } else { pantalla.value = "Error"; }
+      } else { pantalla.value = "Ej: n,r"; }
     }
 
     function factorialNum(num) {
@@ -303,9 +216,7 @@
     function estadistica(tipo) {
       let lista = pantalla.value.split(',').map(x => parseFloat(x.trim()));
       switch (tipo) {
-        case 'mean':
-          pantalla.value = (lista.reduce((a, b) => a + b, 0) / lista.length).toString();
-          break;
+        case 'mean': pantalla.value = (lista.reduce((a, b) => a + b, 0) / lista.length).toString(); break;
         case 'median':
           lista.sort((a, b) => a - b);
           let mid = Math.floor(lista.length / 2);
@@ -333,17 +244,11 @@
 
     function toggleCientifica() {
       modoCientifico = !modoCientifico;
-      if(modoCientifico) {
-        cientificos.style.display = 'grid';
-      } else {
-        cientificos.style.display = 'none';
-      }
+      if(modoCientifico) { cientificos.style.display = 'grid'; }
+      else { cientificos.style.display = 'none'; }
     }
-
-    // Mostrar científico por defecto
-    window.onload = () => {
-      cientificos.style.display = 'grid';
-    };
+    window.onload = () => { cientificos.style.display = 'grid'; };
+    pantalla.addEventListener('keydown', function(e) { if (e.key === 'Enter') { calcular(); } });
   </script>
 </body>
 </html>
