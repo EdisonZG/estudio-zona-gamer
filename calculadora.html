@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Calculadora Científica</title>
+  <title>Calculadora Científica Completa</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -10,18 +10,14 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 100vh;
+      min-height: 100vh;
     }
     .calculadora {
       background: #222;
       padding: 20px;
       border-radius: 10px;
       box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-      width: 280px;
-      transition: width 0.3s;
-    }
-    .calculadora.expandida {
-      width: 480px;
+      width: 600px;
       transition: width 0.3s;
     }
     .pantalla {
@@ -35,22 +31,15 @@
       padding: 5px 10px;
       text-align: right;
     }
-    .botones, .cientificos {
+    .botones, .cientificos, .estadisticas {
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
+      grid-template-columns: repeat(6, 1fr);
       gap: 8px;
       margin-bottom: 8px;
     }
-    .cientificos {
-      display: none;
-    }
-    .cientificos.visible {
-      display: grid;
-      margin-bottom: 8px;
-    }
     button {
-      padding: 16px;
-      font-size: 18px;
+      padding: 12px;
+      font-size: 16px;
       background: #444;
       color: #fff;
       border: none;
@@ -68,52 +57,101 @@
     .expandir {
       background: #18a2b8;
       margin-bottom: 8px;
+      grid-column: span 6;
+    }
+    .label {
+      grid-column: span 6;
+      color: #bbb;
+      font-size: 14px;
+      text-align: center;
+      margin-bottom: 4px;
+    }
+    @media (max-width: 700px) {
+      .calculadora { width: 98vw; }
+      .botones, .cientificos, .estadisticas { grid-template-columns: repeat(4, 1fr);}
     }
   </style>
 </head>
 <body>
   <div id="calculadora" class="calculadora">
-    <input type="text" id="pantalla" class="pantalla" disabled>
+    <input type="text" id="pantalla" class="pantalla" placeholder="0" disabled>
     <button class="expandir" onclick="toggleCientifica()">Modo científico</button>
+    <div class="label">Funciones científicas</div>
     <div id="cientificos" class="cientificos">
       <button onclick="funcion('sin')">sin</button>
       <button onclick="funcion('cos')">cos</button>
       <button onclick="funcion('tan')">tan</button>
+      <button onclick="funcion('asin')">asin</button>
+      <button onclick="funcion('acos')">acos</button>
+      <button onclick="funcion('atan')">atan</button>
+      <button onclick="funcion('sindeg')">sin°</button>
+      <button onclick="funcion('cosdeg')">cos°</button>
+      <button onclick="funcion('tandeg')">tan°</button>
+      <button onclick="funcion('asindeg')">asin°</button>
+      <button onclick="funcion('acosdeg')">acos°</button>
+      <button onclick="funcion('atandeg')">atan°</button>
+      <button onclick="funcion('abs')">abs</button>
+      <button onclick="funcion('round')">round</button>
+      <button onclick="funcion('floor')">floor</button>
+      <button onclick="funcion('ceil')">ceil</button>
+      <button onclick="funcion('inv')">1/x</button>
+      <button onclick="funcion('neg')">+/-</button>
+      <button onclick="potencia()">xʸ</button>
+      <button onclick="funcion('exp')">eˣ</button>
+      <button onclick="funcion('exp10')">10ˣ</button>
+      <button onclick="funcion('sqrt')">√</button>
+      <button onclick="funcion('cbrt')">∛</button>
+      <button onclick="insertarConst('π')">π</button>
+      <button onclick="insertarConst('e')">e</button>
+      <button onclick="porcentaje()">%</button>
+      <button onclick="factorial()">n!</button>
       <button onclick="funcion('log10')">log</button>
       <button onclick="funcion('ln')">ln</button>
-      <button onclick="funcion('sqrt')">√</button>
-      <button onclick="potencia()">xʸ</button>
-      <button onclick="insertarPi()">π</button>
-      <button onclick="funcion('exp')">exp</button>
-      <button onclick="factorial()">n!</button>
-      <button onclick="agregar('(')">(</button>
-      <button onclick="agregar(')')">)</button>
+      <button onclick="logBase()">logₐb</button>
+      <button onclick="funcion('random')">rand</button>
+      <button onclick="permutacion()">nPr</button>
+      <button onclick="combinacion()">nCr</button>
     </div>
+    <div class="label">Funciones estadísticas (usa una lista separada por comas)</div>
+    <div class="estadisticas">
+      <button onclick="estadistica('mean')">media</button>
+      <button onclick="estadistica('median')">mediana</button>
+      <button onclick="estadistica('mode')">moda</button>
+      <button onclick="estadistica('stdev')">σ</button>
+      <button onclick="estadistica('variance')">var</button>
+      <button onclick="limpiar()">C</button>
+    </div>
+    <div class="label">Básicas</div>
     <div class="botones">
       <button onclick="agregar('7')">7</button>
       <button onclick="agregar('8')">8</button>
       <button onclick="agregar('9')">9</button>
       <button onclick="agregar('/')">÷</button>
+      <button onclick="agregar('(')">(</button>
+      <button onclick="agregar(')')">)</button>
       <button onclick="agregar('4')">4</button>
       <button onclick="agregar('5')">5</button>
       <button onclick="agregar('6')">6</button>
       <button onclick="agregar('*')">×</button>
+      <button onclick="agregar(',')">,</button>
+      <button onclick="borrarUno()">←</button>
       <button onclick="agregar('1')">1</button>
       <button onclick="agregar('2')">2</button>
       <button onclick="agregar('3')">3</button>
       <button onclick="agregar('-')">−</button>
+      <button onclick="limpiar()">C</button>
+      <button onclick="agregar('^')">^</button>
       <button onclick="agregar('0')">0</button>
       <button onclick="agregar('.')">.</button>
-      <button onclick="limpiar()">C</button>
+      <button onclick="calcular()" class="igual" style="grid-column: span 2;">=</button>
       <button onclick="agregar('+')">+</button>
-      <button class="igual" style="grid-column: span 4;" onclick="calcular()">=</button>
     </div>
   </div>
   <script>
     let pantalla = document.getElementById('pantalla');
     let cientificos = document.getElementById('cientificos');
     let calculadora = document.getElementById('calculadora');
-    let modoCientifico = false;
+    let modoCientifico = true;
 
     function agregar(valor) {
       pantalla.value += valor;
@@ -123,10 +161,15 @@
       pantalla.value = '';
     }
 
+    function borrarUno() {
+      pantalla.value = pantalla.value.slice(0, -1);
+    }
+
     function calcular() {
       try {
         let expresion = pantalla.value
           .replace(/π/g, Math.PI)
+          .replace(/e/g, Math.E)
           .replace(/\^/g, '**');
         pantalla.value = eval(expresion);
       } catch {
@@ -139,29 +182,33 @@
       let resultado = "";
 
       try {
-        let num = eval(value.replace(/π/g, Math.PI));
+        let arg = eval(value.replace(/π/g, Math.PI).replace(/e/g, Math.E));
         switch (tipo) {
-          case 'sin':
-            resultado = Math.sin(num).toString();
-            break;
-          case 'cos':
-            resultado = Math.cos(num).toString();
-            break;
-          case 'tan':
-            resultado = Math.tan(num).toString();
-            break;
-          case 'log10':
-            resultado = Math.log10(num).toString();
-            break;
-          case 'ln':
-            resultado = Math.log(num).toString();
-            break;
-          case 'sqrt':
-            resultado = Math.sqrt(num).toString();
-            break;
-          case 'exp':
-            resultado = Math.exp(num).toString();
-            break;
+          case 'sin': resultado = Math.sin(arg); break;
+          case 'cos': resultado = Math.cos(arg); break;
+          case 'tan': resultado = Math.tan(arg); break;
+          case 'asin': resultado = Math.asin(arg); break;
+          case 'acos': resultado = Math.acos(arg); break;
+          case 'atan': resultado = Math.atan(arg); break;
+          case 'sindeg': resultado = Math.sin(arg * Math.PI / 180); break;
+          case 'cosdeg': resultado = Math.cos(arg * Math.PI / 180); break;
+          case 'tandeg': resultado = Math.tan(arg * Math.PI / 180); break;
+          case 'asindeg': resultado = Math.asin(arg) * 180 / Math.PI; break;
+          case 'acosdeg': resultado = Math.acos(arg) * 180 / Math.PI; break;
+          case 'atandeg': resultado = Math.atan(arg) * 180 / Math.PI; break;
+          case 'abs': resultado = Math.abs(arg); break;
+          case 'round': resultado = Math.round(arg); break;
+          case 'floor': resultado = Math.floor(arg); break;
+          case 'ceil': resultado = Math.ceil(arg); break;
+          case 'inv': resultado = 1 / arg; break;
+          case 'neg': resultado = -arg; break;
+          case 'exp': resultado = Math.exp(arg); break;
+          case 'exp10': resultado = Math.pow(10, arg); break;
+          case 'sqrt': resultado = Math.sqrt(arg); break;
+          case 'cbrt': resultado = Math.cbrt(arg); break;
+          case 'log10': resultado = Math.log10(arg); break;
+          case 'ln': resultado = Math.log(arg); break;
+          case 'random': resultado = Math.random(); break;
         }
         pantalla.value = resultado;
       } catch {
@@ -173,14 +220,38 @@
       pantalla.value += "^";
     }
 
-    function insertarPi() {
-      pantalla.value += "π";
+    function insertarConst(c) {
+      pantalla.value += c;
+    }
+
+    function porcentaje() {
+      try {
+        let value = eval(pantalla.value.replace(/π/g, Math.PI).replace(/e/g, Math.E));
+        pantalla.value = value / 100;
+      } catch {
+        pantalla.value = "Error";
+      }
+    }
+
+    function logBase() {
+      let partes = pantalla.value.split(',');
+      if (partes.length === 2) {
+        let base = eval(partes[0].replace(/π/g, Math.PI).replace(/e/g, Math.E));
+        let num = eval(partes[1].replace(/π/g, Math.PI).replace(/e/g, Math.E));
+        if (base > 0 && base !== 1 && num > 0) {
+          pantalla.value = (Math.log(num) / Math.log(base));
+        } else {
+          pantalla.value = "Error";
+        }
+      } else {
+        pantalla.value = "Ej: base,numero";
+      }
     }
 
     function factorial() {
       let value = pantalla.value;
       try {
-        let num = Math.floor(eval(value.replace(/π/g, Math.PI)));
+        let num = Math.floor(eval(value.replace(/π/g, Math.PI).replace(/e/g, Math.E)));
         if (num < 0 || isNaN(num)) throw Error();
         let res = 1;
         for (let i = 2; i <= num; i++) res *= i;
@@ -190,16 +261,89 @@
       }
     }
 
+    function permutacion() {
+      // nPr: pantalla = "n,r"
+      let partes = pantalla.value.split(',');
+      if (partes.length === 2) {
+        let n = parseInt(partes[0]);
+        let r = parseInt(partes[1]);
+        if (n >= r && n >= 0 && r >= 0) {
+          pantalla.value = (factorialNum(n) / factorialNum(n - r)).toString();
+        } else {
+          pantalla.value = "Error";
+        }
+      } else {
+        pantalla.value = "Ej: n,r";
+      }
+    }
+
+    function combinacion() {
+      // nCr: pantalla = "n,r"
+      let partes = pantalla.value.split(',');
+      if (partes.length === 2) {
+        let n = parseInt(partes[0]);
+        let r = parseInt(partes[1]);
+        if (n >= r && n >= 0 && r >= 0) {
+          pantalla.value = (factorialNum(n) / (factorialNum(r) * factorialNum(n - r))).toString();
+        } else {
+          pantalla.value = "Error";
+        }
+      } else {
+        pantalla.value = "Ej: n,r";
+      }
+    }
+
+    function factorialNum(num) {
+      if (num < 0 || isNaN(num)) return NaN;
+      let res = 1;
+      for (let i = 2; i <= num; i++) res *= i;
+      return res;
+    }
+
+    function estadistica(tipo) {
+      let lista = pantalla.value.split(',').map(x => parseFloat(x.trim()));
+      switch (tipo) {
+        case 'mean':
+          pantalla.value = (lista.reduce((a, b) => a + b, 0) / lista.length).toString();
+          break;
+        case 'median':
+          lista.sort((a, b) => a - b);
+          let mid = Math.floor(lista.length / 2);
+          pantalla.value = (lista.length % 2 !== 0) ? lista[mid] : ((lista[mid - 1] + lista[mid]) / 2);
+          break;
+        case 'mode':
+          let freq = {};
+          lista.forEach(n => freq[n] = (freq[n] || 0) + 1);
+          let max = Math.max(...Object.values(freq));
+          let modos = Object.keys(freq).filter(k => freq[k] === max);
+          pantalla.value = modos.join(',');
+          break;
+        case 'stdev':
+          let mean = lista.reduce((a, b) => a + b, 0) / lista.length;
+          let sq = lista.map(x => Math.pow(x - mean, 2));
+          pantalla.value = Math.sqrt(sq.reduce((a, b) => a + b, 0) / lista.length);
+          break;
+        case 'variance':
+          let avg = lista.reduce((a, b) => a + b, 0) / lista.length;
+          let sq2 = lista.map(x => Math.pow(x - avg, 2));
+          pantalla.value = (sq2.reduce((a, b) => a + b, 0) / lista.length);
+          break;
+      }
+    }
+
     function toggleCientifica() {
       modoCientifico = !modoCientifico;
       if(modoCientifico) {
-        cientificos.classList.add('visible');
-        calculadora.classList.add('expandida');
+        cientificos.style.display = 'grid';
       } else {
-        cientificos.classList.remove('visible');
-        calculadora.classList.remove('expandida');
+        cientificos.style.display = 'none';
       }
     }
+
+    // Mostrar científico por defecto
+    window.onload = () => {
+      cientificos.style.display = 'grid';
+    };
   </script>
 </body>
 </html>
