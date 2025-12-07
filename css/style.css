@@ -15,17 +15,17 @@
               /* Reset general */
               * {
                 margin: 0;
-                  padding: 0;
+     padding: 0;
                     box-sizing: border-box;
                       scroll-behavior: smooth;
                       }
 
                       body {
-                        background-color: var(--color-fondo);
+             background-color: var(--color-fondo);
                           color: var(--color-texto);
-                            font-family: 'Orbitron', sans-serif;
+              font-family: 'Orbitron', sans-serif;
                               text-align: center;
-                              }
+               }
 
                               /* ================================
                                  Encabezado y navegación
@@ -86,8 +86,7 @@
                                                                                                     @keyframes glow {
                                                                                                       from { filter: drop-shadow(0 0 5px var(--color-principal)); }
                                                                                                         to { filter: drop-shadow(0 0 20px var(--color-principal)); }
-                                                                                                        }
-
+                                                                           
                                                                                                         #inicio h1 {
                                                                                                           color: var(--color-principal);
                                                                                                             font-size: 2.5rem;
@@ -97,52 +96,51 @@
                                                                                                               #inicio p {
                                                                                                                 font-size: 1.2rem;
                                                                                                                   color: #ccc;
-                                                                                                                  }
+                                                                                                    }
 
-                                                                                                                  /* ================================
-                                                                                                                     Enlaces y botones
-                                                                                                                        ================================ */
-                                                                                                                        a {
-                                                                                                                          color: var(--color-principal);
-                                                                                                                          }
+                                                      /* ================================
+                                                        Enlaces y botones
+                                                                ================================ */
+                                                                      a {
+                                                                        color: var(--color-principal);
+                                                                                }
 
-                                                                                                                          a:hover {
-                                                                                                                            text-shadow: 0 0 6px var(--color-principal);
-                                                                                                                            }
+                                        a:hover {
+                                                            text-shadow: 0 0 6px var(--color-principal);
+                                                                    }
 
-                                                                                                                            /* ================================
-                                                                                                                               Pie / Contacto
-                                                                                                                                  ================================ */
-                                                                                                                                  #contacto {
-                                                                                                                                    background: var(--color-secundario);
-                                                                                                                                      border-top: 2px solid var(--color-principal);
-                                                                                                                                        padding-bottom: 3rem;
-                                                                                                                                        }
+                                                      /* ================================
+                                                                  Pie / Contacto
+                                                                        ================================ */
+                                                                                  #contacto {
+                                                                              background: var(--color-secundario);
+                                                                                border-top: 2px solid var(--color-principal);
+                                                                                    padding-bottom: 3rem;
+                                                                                      }
 
-                                                                                                                                        #contacto a {
-                                                                                                                                          color: var(--color-principal);
-                                                                                                                                            text-decoration: none;
-                                                                                                                                              font-weight: bold;
-                                                                                                                                              }
+                                                                                #contacto a {
+                                                                                                    color: var(--color-principal);
+                                                                                      text-decoration: none;
+                                                                               font-weight: bold;
+                                                                             }
 
-                                                                                                                                              #contacto a:hover {
-                                                                                                                                                text-shadow: 0 0 10px var(--color-principal);
-                                                                                                                                                }
+                                                                         #contacto a:hover {
+                                   text-shadow: 0 0 10px var(--color-principal);
+                       
+                                       /* ================================
+                               Responsive
+                                  ================================ */
+@media (max-width: 768px) {
+ nav {
+  flex-direction: column;
+  gap: 1rem;
+ }
 
-                                                                                                                                                /* ================================
-                                                                                                                                                   Responsive
-                                                                                                                                                      ================================ */
-                                                                                                                                                      @media (max-width: 768px) {
-                                                                                                                                                        nav {
-                                                                                                                                                            flex-direction: column;
-                                                                                                                                                                gap: 1rem;
-                                                                                                                                                                  }
+ #inicio h1 {
+  font-size: 2rem;
+ }
 
-                                                                                                                                                                    #inicio h1 {
-                                                                                                                                                                        font-size: 2rem;
-                                                                                                                                                                          }
-
-                                                                                                                                                                            .logo {
-                                                                                                                                                                                width: 140px;
-                                                                                                                                                                                  }
-                                                                                                                                                                                  }
+ .logo {
+  width: 140px;
+ }
+}
