@@ -43,9 +43,8 @@ body {
 
                                                                                                                                                                               h1, h2 {
                                                                                                                                                                                     margin: 20px 0;
-                                                                                                                                                                                        }
+                                                }
 
-                                                                                                                                                                                            a {
-                                                                                                                                                                                                  color: #00ff88;
-                                                                                                                                                                                                      }
-                                                                                                                                                                                                      
+                                                                        a {
+                                                                  color: #00ff88;
+                                                                                                }
