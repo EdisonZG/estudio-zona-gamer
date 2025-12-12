@@ -3,86 +3,79 @@ Estilos principales - Estudio Zona Gamer
 ================================ */
 /* Fuente y colores base */
 @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&display=swap');
-  :root {
-    --color-fondo: #0a0a0a;
-    --color-principal: #00ff88; /* Verde neón */
-    --color-secundario: #1f1f1f;
-    --color-texto: #ffffff;
+:root {
+  --color-fondo: #0a0a0a;
+  --color-principal: #00ff88; /* Verde neón */
+  --color-secundario: #1f1f1f;
+  --color-texto: #ffffff;
 }
 /* Reset general */
 * {
-                margin: 0;
-     padding: 0;
-                    box-sizing: border-box;
-                      scroll-behavior: smooth;
-                      }
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+}
 
-                      body {
-             background-color: var(--color-fondo);
-                          color: var(--color-texto);
-              font-family: 'Orbitron', sans-serif;
-                              text-align: center;
-               }
+body {
+  background-color: var(--color-fondo);
+  color: var(--color-texto);
+  font-family: 'Orbitron', sans-serif;
+  text-align: center;
+}
 
-                              /* ================================
-                                 Encabezado y navegación
-                                    ================================ */
-                                    header {
-                                      background: rgba(0, 0, 0, 0.85);
-                                        border-bottom: 2px solid var(--color-principal);
-                                          padding: 1rem 0;
-                                            position: sticky;
-                                              top: 0;
-                                                z-index: 1000;
-                                                }
-
-                                                nav {
-                                                  display: flex;
-                                                    justify-content: center;
-                                                      gap: 2rem;
-                                                      }
-
-                                                      nav a {
-                                                        color: var(--color-principal);
-                                                          text-decoration: none;
-                                                            font-weight: 600;
-                                                              transition: 0.3s;
-                                                              }
-
-                                                              nav a:hover {
-                                                                color: #ffffff;
-                                                                  text-shadow: 0 0 8px var(--color-principal);
-                                                                  }
-
-                                                                  /* ================================
-                                                                     Secciones generales
-                                                                        ================================ */
-                                                                        .contenedor {
-                                                                          padding: 4rem 2rem;
-                                                                            max-width: 900px;
-                                                                              margin: 0 auto;
-                                                                                border-bottom: 1px solid #222;
-                                                                                }
-
-                                                                                .contenedor h2 {
-                                                                                  color: var(--color-principal);
-                                                                                    margin-bottom: 1rem;
-                                                                                      text-transform: uppercase;
-                                                                                        font-size: 2rem;
-                                                                                        }
-
-                                                                                        /* ================================
-                                                                                           Inicio
-                                                                                              ================================ */
-                                                                                              .logo {
-                                                                                                width: 180px;
-                                                                                                  margin-bottom: 1rem;
-                                                                                                    animation: glow 2s infinite alternate;
-                                                                                                    }
-
-                                                                                                    @keyframes glow {
-                                                                                                      from { filter: drop-shadow(0 0 5px var(--color-principal)); }
-                                                                                                        to { filter: drop-shadow(0 0 20px var(--color-principal)); }
+/* ================================
+Encabezado y navegación
+================================ */
+header {
+  background: rgba(0, 0, 0, 0.85);
+  border-bottom: 2px solid var(--color-principal);
+  padding: 1rem 0;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+nav {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+}
+nav a {
+  color: var(--color-principal);
+  text-decoration: none;
+  font-weight: 600;
+  transition: 0.3s;
+}
+nav a:hover {
+  color: #ffffff;
+  text-shadow: 0 0 8px var(--color-principal);
+}
+/* ================================
+Secciones generales
+================================ */
+.contenedor {
+  padding: 4rem 2rem;
+  max-width: 900px;
+  margin: 0 auto;
+  border-bottom: 1px solid #222;
+}
+.contenedor h2 {
+  color: var(--color-principal);
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+  font-size: 2rem;
+}
+/* ================================
+Inicio
+================================ */
+.logo {
+  width: 180px;
+  margin-bottom: 1rem;
+  animation: glow 2s infinite alternate;
+}
+@keyframes glow {
+  from { filter: drop-shadow(0 0 5px var(--color-principal)); }
+  to { filter: drop-shadow(0 0 20px var(--color-principal)); }
                                                                            
                                                                                                         #inicio h1 {
                                                                                                           color: var(--color-principal);
