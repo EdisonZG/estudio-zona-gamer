@@ -76,50 +76,44 @@ Inicio
 @keyframes glow {
   from { filter: drop-shadow(0 0 5px var(--color-principal)); }
   to { filter: drop-shadow(0 0 20px var(--color-principal)); }
-                                                                           
-                                                                                                        #inicio h1 {
-                                                                                                          color: var(--color-principal);
-                                                                                                            font-size: 2.5rem;
-                                                                                                              margin-bottom: 1rem;
-                                                                                                              }
-
-                                                                                                              #inicio p {
-                                                                                                                font-size: 1.2rem;
-                                                                                                                  color: #ccc;
-                                                                                                    }
-                                                                                                  }
-                                                      /* ================================
-                                                        Enlaces y botones
-                                                                ================================ */
-                                                                      a {
-                                                                        color: var(--color-principal);
-                }
-
-                                        a:hover {
-                                                            text-shadow: 0 0 6px var(--color-principal);
-                                                                    }
-
-                                                      /* ================================
-                                                                  Pie / Contacto
-                                                                        ================================ */
-                                                                                  #contacto {
-                                                                              background: var(--color-secundario);
-                                                                                border-top: 2px solid var(--color-principal);
-                                                                                    padding-bottom: 3rem;
-                                                                                      }
-
-                                                                                #contacto a {
-                                                                                                    color: var(--color-principal);
-                                                                                      text-decoration: none;
-                                                                               font-weight: bold;
-                                                                             }
-
-                                                                         #contacto a:hover {
-                                   text-shadow: 0 0 10px var(--color-principal);
-                       
-                                       /* ================================
-                               Responsive
-                                  ================================ */
+  #inicio h1 {
+    color: var(--color-principal);
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+  }
+  #inicio p {
+    font-size: 1.2rem;
+    color: #ccc;
+  }
+}
+/* ================================
+Enlaces y botones
+================================ */
+a {
+  color: var(--color-principal);
+}
+a:hover {
+  text-shadow: 0 0 6px var(--color-principal);
+}
+/* ================================
+Pie / Contacto
+================================ */
+#contacto {
+  background: var(--color-secundario);
+  border-top: 2px solid var(--color-principal);
+  padding-bottom: 3rem;
+}
+#contacto a {
+  color: var(--color-principal);
+  text-decoration: none;
+  font-weight: bold;
+}
+#contacto a:hover {
+  text-shadow: 0 0 10px var(--color-principal);
+}
+/* ================================
+Responsive
+================================ */
 @media (max-width: 768px) {
  nav {
   flex-direction: column;
