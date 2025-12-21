@@ -74,8 +74,13 @@ Inicio
   animation: glow 2s infinite alternate;
 }
 @keyframes glow {
-  from { filter: drop-shadow(0 0 5px var(--color-principal)); }
-  to { filter: drop-shadow(0 0 20px var(--color-principal)); }
+  from { 
+    filter: drop-shadow(0 0 5px var(--color-principal)); 
+  }
+  to { 
+    filter: drop-shadow(0 0 20px var(--color-principal)); 
+  }
+}
   #inicio h1 {
     color: var(--color-principal);
     font-size: 2.5rem;
@@ -85,7 +90,6 @@ Inicio
     font-size: 1.2rem;
     color: #ccc;
   }
-}
 /* ================================
 Enlaces y botones
 ================================ */
@@ -110,6 +114,18 @@ Pie / Contacto
 }
 #contacto a:hover {
   text-shadow: 0 0 10px var(--color-principal);
+}
+.link-wp{
+  position: relative; /*referencia*/
+}
+.icono-wp {
+  position:absolute;
+  top: 20px;/*sube / baja */
+  left: 20px; /* mueve a la derecha*/
+  width: 100px;
+  height: auto;
+  border: none;
+  cursor: pointer;
 }
 /* ================================
 Responsive
