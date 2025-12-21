@@ -130,6 +130,21 @@ Pie / Contacto
   border: none;
   cursor: pointer;
 }
+.link-f{
+    position: relative; /*referencia*/
+}
+.icono-f {
+  position:absolute;
+  top: 20px;/*sube / baja */
+  left: 20px; /* mueve a la derecha*/
+/*tamaño*/
+  width: 15vw;
+  max-width: 140px;
+  min-width: 80px;
+  height: auto;
+  border: none;
+  cursor: pointer;
+}
 /* ================================
 Responsive
 ================================ */
