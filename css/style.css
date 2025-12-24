@@ -136,7 +136,7 @@ Pie / Contacto
 .icono-f {
   position:absolute;
   top: 20px;/*sube / baja */
-  left: 100px; /* mueve a la derecha*/
+  right: 100px; /* mueve a la izquierda*/
 /*tamaño*/
   width: 15vw;
   max-width: 140px;
