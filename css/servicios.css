@@ -17,6 +17,15 @@
     gap: 25px;
 }
 .servicio  {
-
+    background-color: #111;
+    border:1px solid #00ff99;
+    border-radius: 10px;
+    padding: 20px;
 }
+
+.servicio h3 {
+    color: #00ff99;
+    margin-bottom: 15px;
+}
+
     
