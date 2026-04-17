@@ -3,7 +3,7 @@ import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 // Importamos tu nueva escena 3D
-import Escena from './Escena'
+import Escena from './Escena.jsx'
 
 function App() {
   const [count, setCount] = useState(0)
