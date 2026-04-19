@@ -145,6 +145,21 @@ Pie / Contacto
   border: none;
   cursor: pointer;
 }
+.link-c {
+  position: relative;
+}
+.icono-c {
+  position:absolute;
+  top: 20px;/*sube / baja*/
+  right: 100px; /* mueve a la izquierda*/
+  /*tamaño*/
+  width: 15vw;
+  max-width: 140px;
+  min-width: 80px;
+  height: auto;
+  border: none;
+  cursor: pointer;
+}
 /* ================================
 Responsive
 ================================ */
