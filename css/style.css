@@ -121,7 +121,7 @@ Pie / Contacto
 .icono-wp {
   position:absolute;
   top: 20px;/*sube / baja */
-  left: 0px; /* mueve a la derecha*/
+  right: 0px; /* mueve a la derecha*/
   /*tamaño*/
   width: 15vw;
   max-width: 140px;
