@@ -14,6 +14,7 @@ function App() {
       <Escena />
 
       <div>
+        <a href="../../index.html">Volver al Inicio</a>
         <a href="https://vite.dev" target="_blank">
           <img src={viteLogo} className="logo" alt="Vite logo" />
         </a>
